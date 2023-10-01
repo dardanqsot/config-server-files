@@ -13,4 +13,4 @@ eureka:
 spring:
   data:
     mongodb:
-      uri: mongodb://mitocode:mitocode@localhost:27017/mitocode?authSource=admin
+      uri: mongodb://darwin:darwin@localhost:27017/darwin?authSource=admin
