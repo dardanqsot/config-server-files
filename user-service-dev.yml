@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: ${CUSTOM.SERVER.PORT:9001}
 
 # Eureka Client Configuration
 eureka:
@@ -7,7 +7,7 @@ eureka:
     fetchRegistry: true
     registerWithEureka: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${CUSTOM.EUREKA.HOST:http://localhost:8761/eureka}
 
 # MongoDB database configuration
 spring:
