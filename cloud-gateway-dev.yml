@@ -9,8 +9,23 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
 
-# Cloud Gateway Routes
+# Circuit Breaker configuration
+resilience4j:
+  circuitbreaker:
+    configs:
+      circuitBreakerProduct:
+        slidingWindowSize: 16
+        failureRateThreshold: 75
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 10
+        slowCallDurationThreshold: 200ms
+        slowCallRateThreshold: 50
+    instances:
+      product-cb:
+        base-config: circuitBreakerProduct
 
+
+# Cloud Gateway Routes
 filter:
   parameters:
     appCallerName: MitocodeConfig
@@ -20,14 +35,25 @@ spring:
   cloud:
     gateway:
       routes:
+        
         - id: product-service
           uri: lb://product-service
           predicates:
             - Path=/api/product-service/**
           filters:
+            - name: CircuitBreaker
+              args:
+                name: product-cb
+                statusCode: 400, 401, 404, 500, 503, 504
+                fallbackUri: forward:/api/user-service/user
+            # - AddRequestHeader=appCallerName, ${filter.parameters.appCallerName}
+            # - AddRequestParameter=flag, ${filter.parameters.flag}
+            # - name: MitocodeProductFilter
+            #   args:
+            #     headerKey: appCallerName
+            #     headerValue: Java17
             - StripPrefix=2
-            - AddRequestHeader=appCallerName, ${filter.parameters.appCallerName}
-            - AddRequestParameter=flag, ${filter.parameters.flag}
+
 
         - id: user-service
           uri: lb://user-service
