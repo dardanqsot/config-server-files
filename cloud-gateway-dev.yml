@@ -1,0 +1,37 @@
+server:
+  port: ${CUSTOM.SERVER.PORT:9080}
+
+# Eureka Client Config
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
+
+# Cloud Gateway Routes
+
+filter:
+  parameters:
+    appCallerName: MitocodeConfig
+    flag: false
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/product-service/**
+          filters:
+            - StripPrefix=2
+            - AddRequestHeader=appCallerName, ${filter.parameters.appCallerName}
+            - AddRequestParameter=flag, ${filter.parameters.flag}
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user-service/**
+          filters:
+            - StripPrefix=2
