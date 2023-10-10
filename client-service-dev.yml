@@ -20,6 +20,7 @@ resilience4j:
         permittedNumberOfCallsInHalfOpenState: 8
         slowCallDurationThreshold: 1s
         slowCallRateThreshold: 50
+        
       productServiceCircuitBreaker:
         slidingWindowSize: 8
         failureRateThreshold: 60
