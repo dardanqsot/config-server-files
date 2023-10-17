@@ -39,6 +39,6 @@ spring:
             provider: external
             client-name: external-client
             client-id: external-client
-            client-secret: MtbhMWVBcUi7Xp31U6GEofDp7jS88B6X
+            client-secret: 3BZZCwrFdAKWxHPOdN6cTWapnLdaSMm5
             scope: openid
             authorization-grant-type: authorization_code
