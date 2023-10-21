@@ -14,3 +14,14 @@ spring:
   data:
     mongodb:
       uri: mongodb://darwin:darwin@localhost:27017/darwin?authSource=admin
+
+management:
+  endpoints:
+    info:
+      env:
+        enabled: true
+    web:
+      exposure:
+        # include: 'metrics, disk_space, mem, cpu, prometheus'
+        include: '*'
+        base-path: /actuator
