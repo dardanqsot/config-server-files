@@ -51,7 +51,7 @@ spring:
 
             # - AddRequestHeader=appCallerName, ${filter.parameters.appCallerName}
             # - AddRequestParameter=flag, ${filter.parameters.flag}
-            # - name: MitocodeProductFilter
+            # - name: DarwinProductFilter
             #   args:
             #     headerKey: appCallerName
             #     headerValue: Java17
