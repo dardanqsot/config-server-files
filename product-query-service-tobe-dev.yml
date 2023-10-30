@@ -1,0 +1,9 @@
+server:
+  port: ${CUSTOM.SERVER.PORT:9999}
+      
+# Actuator configuration
+info:
+  app:
+    name: Product Service Microservice
+    description: Módulo de la arquitectura que disponibiliza información de los productos
+    version: 1.0

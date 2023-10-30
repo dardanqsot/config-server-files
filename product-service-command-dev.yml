@@ -1,3 +1,6 @@
+server:
+  port: ${CUSTOM.SERVER.PORT:9022}
+
   # security:
   #   oauth2:
   #     client:
@@ -19,6 +22,7 @@ spring:
     mongodb:
       uri: ${MONGODB.URL.CONNECTION:mongodb://darwin:darwin@localhost:27017/darwin?authSource=admin}
 
+
 info:
   app:
     name: Producto Service Darwin
@@ -27,6 +31,6 @@ info:
 
 kafka:
   darwin:
-    topic: mitocode
+    topic: darwin
     server: 127.0.0.1
     port: 9092
