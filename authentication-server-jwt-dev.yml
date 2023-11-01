@@ -1,11 +1,11 @@
 server:
   port: ${CUSTOM.SERVER.PORT:8088}
 
-### Mongo database configuration
-spring:
-  data:
-    mongodb:
-      uri: mongodb://darwin:darwin@localhost:27017/darwin?authSource=admin
+# ### Mongo database configuration
+# spring:
+#   data:
+#     mongodb:
+#       uri: mongodb://darwin:darwin@localhost:27017/darwin?authSource=admin
 
 darwin:
   security:

@@ -1,6 +1,12 @@
 server:
   port: ${CUSTOM.SERVER.PORT:9999}
-      
+
+### Mongo database configuration
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB.URL.CONNECTION:mongodb://darwin:darwin@localhost:27018/darwin?authSource=admin}
+
 # Actuator configuration
 info:
   app:
