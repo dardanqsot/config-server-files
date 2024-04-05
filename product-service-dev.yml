@@ -82,3 +82,10 @@ logging:
         web: DEBUG
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+
+kafka:
+  darwin:
+    topic: darwin
+    server: 127.0.0.1
+    port: 9092
