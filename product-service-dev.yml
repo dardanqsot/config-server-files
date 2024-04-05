@@ -1,32 +1,84 @@
-  # security:
-  #   oauth2:
-  #     client:
-  #       provider:
-  #         external:
-  #           issuer-uri: http://localhost:8080/realms/external
-  #       registration:
-  #         external:
-  #           provider: external
-  #           client-name: external-client
-  #           client-id: external-client
-  #           client-secret: MtbhMWVBcUi7Xp31U6GEofDp7jS88B6X
-  #           scope: openid
-  #           authorization-grant-type: authorization_code
+server:
+  port: 9091
 
-### Mongo database configuration
-spring:
-  data:
-    mongodb:
-      uri: ${MONGODB.URL.CONNECTION:mongodb://darwin:darwin@localhost:27017/darwin?authSource=admin}
+# Eureka configuration
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
 
-info:
-  app:
-    name: Producto Service Darwin
-    description: Módulo de la arquitectura de Microservicios que disponibiliza la información de los productos
-    version: 0.0.1
+### Postgresql database configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show: true
+    properties:
+      hibernate:
+        format_sql: true
+#        dialect: org.hibernate.dialect.PostgreSQL81Dialect
+  datasource:
+    url: ${POSTGRESQL.URL.CONNECTION:jdbc:postgresql://localhost:5432/darwin}
+    username: darwin
+    password: darwin
 
-kafka:
-  darwin:
-    topic: mitocode
-    server: 127.0.0.1
-    port: 9092
+# Circuit Breaker configuration
+resilience4j:
+  circuitbreaker:
+    configs:
+      userServiceCircuitBreaker: # cualquierId
+        slidingWindowSize: 8
+        failureRateThreshold: 60
+        waitDurationInOpenState: 20s
+        permittedNumberOfCallsInHalfOpenState: 8
+        slowCallDurationThreshold: 1s
+        slowCallRateThreshold: 50
+        
+      productServiceCircuitBreaker:
+        slidingWindowSize: 8
+        failureRateThreshold: 60
+        waitDurationInOpenState: 20s
+        permittedNumberOfCallsInHalfOpenState: 4
+        slowCallDurationThreshold: 1s
+        slowCallRateThreshold: 50
+
+    instances:
+      user-service-cb:
+        base-config: userServiceCircuitBreaker #cualquierId
+      product-service-cb:
+        base-config: productServiceCircuitBreaker
+
+# Actuator configuration
+management:
+  endpoints:
+    info:
+      env:
+        enabled: true
+    web:
+      exposure:
+        # include: 'metrics, disk_space, mem, cpu, prometheus'
+        include: '*'
+        base-path: /actuator
+    tracing:
+      sampling:
+        probability: 1.0
+
+# OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: swagger-ui.html
+    enabled: true
+  show-actuator: false
+
+# Logging Configuration
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
