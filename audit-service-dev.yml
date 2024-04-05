@@ -10,6 +10,6 @@ spring:
 
 kafka:
   darwin:
-    topic: mitocode
+    topic: darwin
     server: 127.0.0.1
     port: 9092
