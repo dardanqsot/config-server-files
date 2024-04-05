@@ -89,3 +89,9 @@ kafka:
     topic: darwin
     server: 127.0.0.1
     port: 9092
+
+### Mongo database configuration
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB.URL.CONNECTION:mongodb://darwin:darwin@localhost:27017/darwin?authSource=admin}
