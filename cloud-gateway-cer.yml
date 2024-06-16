@@ -28,9 +28,9 @@ spring:
           filters:
             - StripPrefix=2
 
-        - id: user-service
+        - id: user-service-fallback
           uri: lb://user-service
           predicates:
-            - Path=/api/user-service/dardan/user
+            - Path=/api/user-service/mitocode/user
           filters:
             - StripPrefix=4
