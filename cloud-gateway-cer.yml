@@ -9,6 +9,28 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
 
+# Circuit Breaker configuration
+resilience4j:
+  circuitbreaker:
+    configs:
+      circuitBreakerProduct:
+        slidingWindowSize: 16
+        failureRateThreshold: 75
+        waitDurationInOpenState: 30s
+        permittedNumberOfCallsInHalfOpenState: 10
+        slowCallDurationThreshold: 200ms
+        slowCallRateThreshold: 50
+    instances:
+      product-cb:
+        base-config: circuitBreakerProduct
+  timelimiter:
+    configs:
+      timelimiterProduct:
+        timeoutDuration: 150ms
+    instances:
+      product-cb:
+        base-config: timelimiterProduct
+
 #filter:  
 # parameters:
 #   appCallerName: DarDanConfig
@@ -25,22 +47,22 @@ spring:
             - Path=/api/product-service/**
           filters:
             - StripPrefix=2
+            - name: CircuitBreaker
+              args:
+                name: product-cb
+                statusCodes: 400, 401, 403, 500, 503, 504
+                fallbackUri: forward:/api/user-service/dardan/user
+
             # - AddRequestHeader=appCallerName, ${filter.parameters.appCallerName}
             # - AddRequestParameter=flag, ${filter.parameters.flag}
             # - name: DardanProductFilter
             #   args:
             #     headerKey: appCallerName
             #     headerValue: Java17
+
         - id: user-service
           uri: lb://user-service
           predicates:
             - Path=/api/user-service/**
           filters:
             - StripPrefix=2
-
-        - id: user-service-fallback
-          uri: lb://user-service
-          predicates:
-            - Path=/api/user-service/dardan/user
-          filters:
-            - StripPrefix=4
