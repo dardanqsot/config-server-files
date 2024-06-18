@@ -9,6 +9,11 @@ eureka:
     serviceUrl:
       defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
 
+#filter:  
+# parameters:
+#   appCallerName: DarDanConfig
+#   flag: true
+
 # Cloud Gateway Routes
 spring:
   cloud:
@@ -20,7 +25,12 @@ spring:
             - Path=/api/product-service/**
           filters:
             - StripPrefix=2
-
+            # - AddRequestHeader=appCallerName, ${filter.parameters.appCallerName}
+            # - AddRequestParameter=flag, ${filter.parameters.flag}
+            # - name: DardanProductFilter
+            #   args:
+            #     headerKey: appCallerName
+            #     headerValue: Java17
         - id: user-service
           uri: lb://user-service
           predicates:
@@ -31,6 +41,6 @@ spring:
         - id: user-service-fallback
           uri: lb://user-service
           predicates:
-            - Path=/api/user-service/mitocode/user
+            - Path=/api/user-service/dardan/user
           filters:
             - StripPrefix=4
