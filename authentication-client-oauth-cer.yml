@@ -1,0 +1,13 @@
+server:
+  port: ${CUSTOM.SERVER.PORT:8088}
+
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+           # github
+           google:
+             client-id: 932695674702-jlscfo55b53uvtvuqhjd3tbea0mdpkhi.apps.googleusercontent.com
+             client-secret: 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
