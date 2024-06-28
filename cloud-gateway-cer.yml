@@ -51,7 +51,7 @@ spring:
               args:
                 name: product-cb
                 statusCodes: 400, 401, 403, 500, 503, 504
-
+                fallbackUri: forward:/api/user-service/dardan/user
             # - AddRequestHeader=appCallerName, ${filter.parameters.appCallerName}
             # - AddRequestParameter=flag, ${filter.parameters.flag}
             # - name: DardanProductFilter
@@ -65,3 +65,11 @@ spring:
             - Path=/api/user-service/**
           filters:
             - StripPrefix=2
+        
+        - id: user-service-fallback
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user-service/dardan/user
+          filters:
+            - StripPrefix=4
+
