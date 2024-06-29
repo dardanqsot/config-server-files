@@ -1,2 +1,14 @@
 server:
   port: ${CUSTOM.SERVER.PORT:8088}
+
+# MongoDB database configuration
+spring:
+  data:
+    mongodb:
+      uri: mongodb://dardan:dardan@localhost:27018/dardan?authSource=admin
+
+darwin:
+  security:
+    client: dardan
+    secret: dardan
+    key: dardan
