@@ -11,4 +11,4 @@ darwin:
   security:
     client: dardan
     secret: dardan
-    key: dardan
+    key: e564d8fc5577eef3343caee247e52430f3a9d187c5588518b67485cf36cb4fd9f354accba73019928d4fa5b678d3d90a3dc1c52be9d66e609b245341b7ca24efe0e73a4449250b0e478850b2ffa6043a00c2f51aa7826475d205da3c242313b8
