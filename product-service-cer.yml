@@ -40,6 +40,6 @@ spring:
             provider: external
             client-name: external-client
             client-id: external-client
-            client-secret: qUTBkqak08K3d7s4ctUZA4vlFM6ScNnx
+            client-secret: szHPXv8NYqNTr6koWeM32lpWQavFvEWD
             scope: openid
             authorization-grant-type: authorization_code
