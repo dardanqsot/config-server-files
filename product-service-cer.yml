@@ -29,3 +29,14 @@ spring:
     username: dardan
     password: dardan
 
+  security:
+    oauth2:
+      client:
+        registration:
+          external:
+            provider: external
+            client-name: external-client
+            client-id: external-client
+            client-secret: qUTBkqak08K3d7s4ctUZA4vlFM6ScNnx
+            scope: openid
+            authorization-grant-type: authorization_code
