@@ -29,17 +29,25 @@ spring:
     username: dardan
     password: dardan
 
-  security:
-    oauth2:
-      client:
-        provider:
-          external:
-            issuer-uri: http://localhost:8080/realms/external
-        registration:
-          external:
-            provider: external
-            client-name: external-client
-            client-id: external-client
-            client-secret: szHPXv8NYqNTr6koWeM32lpWQavFvEWD
-            scope: openid
-            authorization-grant-type: authorization_code
+  # security:
+  #   oauth2:
+  #     client:
+  #       provider:
+  #         external:
+  #           issuer-uri: http://localhost:8080/realms/external
+  #       registration:
+  #         external:
+  #           provider: external
+  #           client-name: external-client
+  #           client-id: external-client
+  #           client-secret: szHPXv8NYqNTr6koWeM32lpWQavFvEWD
+  #           scope: openid
+  #           authorization-grant-type: authorization_code
+
+  springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: swagger-ui.html
+    enabled: true
