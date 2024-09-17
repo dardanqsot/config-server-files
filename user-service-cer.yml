@@ -13,3 +13,22 @@ spring:
   data:
     mongodb:
       uri: mongodb://dardan:dardan@localhost:27018/dardan?authSource=admin
+
+# Actuator configuration
+info:
+  app:
+    name: User Service Dardan
+    description: Módulo de la arquitectura que disponibiliza información de los usuarios
+    version: 1.0
+
+# Actuator configuration
+management:
+  endpoints:
+    info:
+      env:
+        enabled: true
+    web:
+      exposure:
+        # include: 'metrics, disk_space, mem, cpu, prometheus'
+        include: '*'
+        base-path: /actuator
