@@ -1,0 +1,15 @@
+server:
+  port: ${CUSTOM.SERVER.PORT:9111}
+
+### Mongo database configuration
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB.URL.CONNECTION:mongodb://dardan:dardan@localhost:27019/dardan?authSource=admin}
+
+# Actuator configuration
+info:
+  app:
+    name: Product Service Microservice
+    description: Módulo de la arquitectura que disponibiliza información de los productos
+    version: 1.0
