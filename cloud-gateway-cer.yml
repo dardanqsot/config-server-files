@@ -72,7 +72,22 @@ spring:
             - Path=/api/user-service/dardan/user
           filters:
             - StripPrefix=4
+ 
+        - id: product-query-service
+          uri: lb://product-query-service # 9111
+          predicates:
+            - Path=/api/product-query-service/**
+            - Weight=product-query-service, 75
+          filters:
+            - StripPrefix=2
 
+        - id: product-query-service-tobe
+          uri: lb://product-query-service-tobe # 9999
+          predicates:
+            - Path=/api/product-query-service/**
+            - Weight=product-query-service, 25
+          filters:
+            - StripPrefix=2
 
 dardan:
   security:
