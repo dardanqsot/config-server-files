@@ -20,7 +20,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: ${MONGODB.URL.CONNECTION:mongodb://dardan:dardan@localhost:27019/dardan?authSource=admin}
+      uri: ${MONGODB.URL.CONNECTION:mongodb://dardan:dardan@localhost:27018/dardan?authSource=admin}
 
 
 info:
