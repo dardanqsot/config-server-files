@@ -1,13 +1,14 @@
 server:
   port: ${CUSTOM.SERVER.PORT:9080}
 
-# Eureka Client Config
+# Eureka configuration
 eureka:
   client:
     fetchRegistry: true
     registerWithEureka: true
     serviceUrl:
-      defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA.SERVER.HOSTNAME:http://discovery-server:8761/eureka}
+      #defaultZone: ${EUREKA.SERVER.HOSTNAME:http://localhost:8761/eureka}
 
 # Circuit Breaker configuration
 resilience4j:
