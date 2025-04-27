@@ -1,11 +1,11 @@
 server:
-  port: ${CUSTOM.SERVER.PORT:9111}
+  port: ${CUSTOM.SERVER.PORT:9999}
 
 ### Mongo database configuration
 spring:
   data:
     mongodb:
-      uri: ${MONGODB.URL.CONNECTION:mongodb://dardan:dardan@localhost:27018/dardan?authSource=admin}
+      uri: ${MONGODB.URL.CONNECTION:mongodb://dardan:dardan@localhost:27019/dardan?authSource=admin}
 
 # Actuator configuration
 info:
